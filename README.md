@@ -29,13 +29,13 @@ CREATE TABLE [Categories]
 CREATE TABLE [CategoryTranslations]
 (
 	[ID] int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-	[LanugageID] int NOT NULL FOREIGN KEY REFERENCES [Languages]([ID]),
+	[LanguageID] int NOT NULL FOREIGN KEY REFERENCES [Languages]([ID]),
 	[CategoryID] int NOT NULL FOREIGN KEY REFERENCES [Categories]([ID]),
 	[Name] nvarchar(512) NOT NULL
 )
 ```
 
-The the Linq query to a list of categories without localized data would look like:
+The Linq query to a list of categories without localized data would look like:
 
 ```csharp
 var categories = ctx.Categories
@@ -46,14 +46,14 @@ var categories = ctx.Categories
 		}).ToList();
 ```
 
-However to retrieve localized catetory names, for example the Frech version the query would need to look something like:
+However to retrieve localized category names, for example the French version the query would need to look something like:
 
 ```csharp
 var categories = ctx.Categories
 		.Select(c => new 
 		{ 
 			ID = c.ID, 
-			Name = c.CategoryTranslations.Where(ct => ct.Lanugage.IsoCode == "fr").Select(ct => ct.Name).FirstOrDefault() ?? c.Name
+			Name = c.CategoryTranslations.Where(ct => ct.Language.IsoCode == "fr").Select(ct => ct.Name).FirstOrDefault() ?? c.Name
 		}).ToList();
 ```
 
@@ -72,14 +72,18 @@ var categories = this.Categories
 		.ToList();
 ```
 
-In the above query the `.Localize(...)` method call will automatically replace `Name = c.Name` in the projection with `Name = c.CategoryTranslations.Where(ct => ct.Lanugage.IsoCode == "fr").Select(ct => ct.Name).FirstOrDefault() ?? c.Name`
+In the above query the `.Localize(...)` method call will automatically replace `Name = c.Name` in the projection with `Name = c.CategoryTranslations.Where(ct => ct.Language.IsoCode == "fr").Select(ct => ct.Name).FirstOrDefault() ?? c.Name`
 as if the localized query was written manually.
 
 
 Getting Started
 -----------------
+***Step 1.***  Install from Nuget: https://www.nuget.org/packages/iQuarc.DataLocalization/
 
-1. First step is to register a localization entity, tipically this is done on the DbContext static constructor
+Or from Command Line:
+	`PM> Install-Package iQuarc.DataLocalization`
+
+***Step 2.*** First step is to register a localization entity, typically this is done on the DbContext static constructor
 
 ```csharp
 static AppDbContext()
@@ -89,7 +93,7 @@ static AppDbContext()
 
 ```
 
-2. Mark all entities that contain localized data with `TranslationFor` attribute
+***Step 3.*** Mark all entities that contain localized data with `[TranslationFor]` attribute
 
 ```csharp
 [TranslationFor(typeof(Category))]
@@ -103,7 +107,7 @@ public class CategoryTranslation
 }
 ```
 
-3. Use the `.Localize()` extension method to localize queries containing projections (contain `.Select()` calls that [project data to new entities)
+***Step 4.*** Use the `.Localize()` extension method to localize queries containing projections (contain `.Select()` calls that [project data to new entities)
 
 __! Important !__
 ========
