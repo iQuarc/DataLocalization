@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQuarc.DataLocalization", "iQuarc.DataLocalization\iQuarc.DataLocalization.csproj", "{DFF2DDD5-B899-4690-AD23-2F32E107415A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iQuarc.DataLocalization.Tests", "iQuarc.DataLocalization.Tests\iQuarc.DataLocalization.Tests.csproj", "{466C6B2D-2544-40B6-95D5-9B9204C493EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{DFF2DDD5-B899-4690-AD23-2F32E107415A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFF2DDD5-B899-4690-AD23-2F32E107415A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFF2DDD5-B899-4690-AD23-2F32E107415A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{466C6B2D-2544-40B6-95D5-9B9204C493EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{466C6B2D-2544-40B6-95D5-9B9204C493EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{466C6B2D-2544-40B6-95D5-9B9204C493EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{466C6B2D-2544-40B6-95D5-9B9204C493EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF6F99D1-C936-4666-8676-A445BDD1F347}
 	EndGlobalSection
 EndGlobal

@@ -10,8 +10,8 @@ namespace iQuarc.DataLocalization
     internal class LocalizationExpressionVisitor : ExpressionVisitor
     {
         private static readonly ConcurrentDictionary<PropertyInfo, PropertyMapping> Translations = new ConcurrentDictionary<PropertyInfo, PropertyMapping>();
-        private const string LanguageCodeIsoTwoLetterCodePropertyName = "Code";
         private readonly CultureInfo currentCulture;
+        private bool directlyInSelectMethod;
 
         public LocalizationExpressionVisitor(CultureInfo currentCulture)
         {
@@ -23,8 +23,17 @@ namespace iQuarc.DataLocalization
 
         public string CurrentLanguageCode => currentCulture.TwoLetterISOLanguageName;
 
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            directlyInSelectMethod = false;
+            if (node.Method.Name == nameof(Queryable.Select))
+                directlyInSelectMethod = true;
+            return base.VisitMethodCall(node);
+        }
+
         protected override Expression VisitNew(NewExpression node)
         {
+            directlyInSelectMethod = false;
             return Expression.New(node.Constructor, node.Arguments.Select(arg =>
             {
                 var rightSide = arg as MemberExpression;
@@ -42,11 +51,23 @@ namespace iQuarc.DataLocalization
                     }
                 }
                 return arg;
-            }), node.Members);
+            }));
+        }
+
+        protected override Expression VisitMember(MemberExpression node)
+        {
+            if (directlyInSelectMethod)
+            {
+                PropertyMapping mapping = GetTranslationMapping(node.Member as PropertyInfo);
+                if (mapping != null)
+                    return GetTranslationExpression(node, mapping, CurrentLanguageCode);
+            }
+            return base.VisitMember(node);
         }
 
         protected override MemberAssignment VisitMemberAssignment(MemberAssignment node)
         {
+            directlyInSelectMethod = false;
             var rightSide = node.Expression as MemberExpression;
             var property = rightSide?.Member as PropertyInfo;
             if (property != null)
