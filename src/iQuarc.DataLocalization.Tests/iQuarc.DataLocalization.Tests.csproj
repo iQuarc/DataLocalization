@@ -52,6 +52,8 @@
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\CateogoryLocalization.cs" />
     <Compile Include="Model\Language.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="UnitTests\CultureKeyMappingTests.cs" />
     <Compile Include="UnitTests\QueryTranslationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

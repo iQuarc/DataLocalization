@@ -7,17 +7,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace iQuarc.DataLocalization.Tests.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class QueryTranslationTests
     {
         [ClassInitialize]
         public static void Setup(TestContext ctx)
         {
             LocalizationConfig.RegisterLocalizationEntity<Language>(l => l.IsoCode);
             LocalizationConfig.RegisterLocalizationProvider(DefaultTestCulture);
+            LocalizationConfig.RegisterCultureMapper(c => c.TwoLetterISOLanguageName);
         }
 
         [TestMethod]
-        public void TranslateWifhDefaultCultureGetsTheCorrectTranslation()
+        public void TranslateWithDefaultCultureGetsTheCorrectTranslation()
         {
             var beerCategory = GetCategories()
                 .Where(c => c.Id == 1)

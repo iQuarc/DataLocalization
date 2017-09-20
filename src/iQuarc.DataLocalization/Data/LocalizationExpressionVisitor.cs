@@ -15,13 +15,10 @@ namespace iQuarc.DataLocalization
 
         public LocalizationExpressionVisitor(CultureInfo currentCulture)
         {
-            if (currentCulture == null)
-                throw new ArgumentNullException(nameof(currentCulture));
-
-            this.currentCulture = currentCulture;
+            this.currentCulture = currentCulture ?? throw new ArgumentNullException(nameof(currentCulture));
         }
 
-        public string CurrentLanguageCode => currentCulture.TwoLetterISOLanguageName;
+        private object CurrentLanguageCode => LocalizationConfig.CultureIdentifier(currentCulture);
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
@@ -86,7 +83,7 @@ namespace iQuarc.DataLocalization
             return base.VisitMemberAssignment(node);
         }
 
-        private static Expression GetTranslationExpression(MemberExpression memberExpression, PropertyMapping propertyMapping, string languageCode)
+        private static Expression GetTranslationExpression(MemberExpression memberExpression, PropertyMapping propertyMapping, object languageCode)
         {
 
             // This method transforms member expression {e} to {e.Translations.Where(p => p.Language.Code == "en").Select(p => p.Property).FirstOrDefault() ?? e.Property}
@@ -116,18 +113,25 @@ namespace iQuarc.DataLocalization
                                          Expression.Property(entity, propertyMapping.SourceProperty));
         }
 
-        private static LambdaExpression LanguageCodeLambda(PropertyMapping propertyMapping, string languageCode)
+        private static LambdaExpression LanguageCodeLambda(PropertyMapping propertyMapping, object languageCode)
         {
             // Target: p => p.Language.Code == "en"
             var param = Expression.Parameter(propertyMapping.TranslationEntity, "p"); //{p}
 
-            var twoLetterIsoLanguageName = Expression.Property(
+            var languageProperty = Expression.Property(
                 Expression.Property(param, propertyMapping.LanguageProperty), 
-                ((MemberExpression)((LambdaExpression)LocalizationConfig.LanguageExpression).Body).Member.Name); //{p.Language.Code}
+                ((MemberExpression)StripConvert(((LambdaExpression)LocalizationConfig.LanguageExpression).Body)).Member.Name); //{p.Language.Code}
 
-            var equalsExpression = Expression.Equal(twoLetterIsoLanguageName, Expression.Constant(languageCode)); // {p.Language.Code == "en"}
+            var equalsExpression = Expression.Equal(languageProperty, Expression.Constant(languageCode)); // {p.Language.Code == "en"}
             var languageCodeLambda = Expression.Lambda(equalsExpression, param); //{p => p.Language.Code == "en"}
             return languageCodeLambda;
+        }
+
+        private static Expression StripConvert(Expression expression)
+        {
+            if (expression.NodeType == ExpressionType.Convert)
+                return ((UnaryExpression) expression).Operand;
+            return expression;
         }
 
         private static PropertyMapping GetTranslationMapping(PropertyInfo sourceProperty)

@@ -117,3 +117,17 @@ Related Repositories
 -------------------------
 [iQuarc.AppBoot](https://github.com/iQuarc/AppBoot)
 [iQuarc.DataAccess](https://github.com/iQuarc/DataAccess)
+
+
+Changing the localization entity identifying key
+---------------------------------------------------
+
+In order to change the key used to identify the localization entity the following configurations can be used:
+
+```csharp
+        LocalizationConfig.RegisterLocalizationEntity<Language>(l => l.LCID);
+        LocalizationConfig.RegisterCultureMapper(c => c.LCID);
+```
+
+The example sets up the LCID to be the language idetifier, which is a numeric code part of [[RFC5646]](http://www.rfc-editor.org/rfc/bcp/bcp47.txt) 
+[See Also, Microsoft LCID structure:](https://msdn.microsoft.com/en-us/library/cc233968.aspx?f=255&MSPPError=-2147217396)
