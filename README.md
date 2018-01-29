@@ -5,7 +5,7 @@ Data Localization is a helper library for Linq based data access frameworks that
 Overview
 -----------
 
-The library provides a set of helper methods for querying localized data split in multiple tables. The library works by rewriting Linq that perform projections on the main table to retrieve data from localization tables when available.
+The library provides a set of helper methods for querying localized data split in multiple tables. The library works by rewriting Linq expression trees that perform projections on the main table, to join and retrieve data from localization tables when available.
 
 Usage Patterns
 ------------------
