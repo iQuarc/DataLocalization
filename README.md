@@ -1,6 +1,6 @@
 iQuarc.DataLocalization
 ==========
-Data Localization is a helper library for Linq based data access frameworks that allows easy writing queries for retrieving localized data.
+Data Localization is a helper library for Linq based data access frameworks (Such as Entity Framework 6, Entity Framework Core, Linq2SQL, nHibernate, and others) that allows easy writing queries for retrieving localized data.
 
 Overview
 -----------
