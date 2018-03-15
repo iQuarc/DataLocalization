@@ -9,11 +9,13 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<summary>$description$</summary>
 		<description>$description$</description>
-		<releaseNotes>Helper library for writing Data Localization Queries for Linq based data access technologies</releaseNotes>
 		<copyright>Copyright 2016</copyright>
 		<tags>Linq Data Localization Helper DataAccess MultiLanguage</tags>
 		<licenseUrl>https://raw.githubusercontent.com/iQuarc/DataLocalization/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/iQuarc/DataLocalization</projectUrl>
     <iconUrl>http://iquarc.com/images/iquarc-icon-BW-32x32.png</iconUrl>
+    <releaseNotes>
+- Fixed nested translation bug preventing translation of nested collections
+    </releaseNotes>
 	</metadata>
 </package>

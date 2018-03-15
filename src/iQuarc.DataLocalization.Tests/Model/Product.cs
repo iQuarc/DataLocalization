@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace iQuarc.DataLocalization.Tests.Model
 {
@@ -8,8 +9,12 @@ namespace iQuarc.DataLocalization.Tests.Model
         public int Id { get; set; }
 
         [MaxLength(255)]
-        public int Name { get; set; }
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public string Name { get; set; }
+
+        [MaxLength(1024)]
+        public string Description { get; set; }
+
+        public List<Category> Categories { get; set; } = new List<Category>();
+        public List<ProductLocalization> Localizations { get; set; } = new List<ProductLocalization>();
     }
 }

@@ -11,6 +11,7 @@ namespace iQuarc.DataLocalization.Tests.Model
         [MaxLength(128)]
         public string Name { get; set; }
 
-        public List<CateogoryLocalization> Localizations { get; set; }
+        public List<Product> Products { get; set; } = new List<Product>();
+        public List<CateogoryLocalization> Localizations { get; set; } = new List<CateogoryLocalization>();
     }
 }

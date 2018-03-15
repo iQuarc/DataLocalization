@@ -47,7 +47,7 @@ namespace iQuarc.DataLocalization
                         }
                     }
                 }
-                return arg;
+                return Visit(arg);
             }));
         }
 
@@ -58,6 +58,7 @@ namespace iQuarc.DataLocalization
                 PropertyMapping mapping = GetTranslationMapping(node.Member as PropertyInfo);
                 if (mapping != null)
                     return GetTranslationExpression(node, mapping, CurrentLanguageCode);
+                return base.VisitMember(node);
             }
             return base.VisitMember(node);
         }
@@ -78,7 +79,7 @@ namespace iQuarc.DataLocalization
                         node = Expression.Bind(node.Member, translationExpresison);
                     }
                 }
-
+                return base.VisitMemberAssignment(node);
             }
             return base.VisitMemberAssignment(node);
         }
