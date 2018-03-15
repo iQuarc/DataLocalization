@@ -1,64 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DFF2DDD5-B899-4690-AD23-2F32E107415A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>iQuarc.DataLocalization</RootNamespace>
-    <AssemblyName>iQuarc.DataLocalization</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFrameworks>netstandard2.0;net451;netcoreapp2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Helper library for writing Data Localization Queries for Linq based data access technologies</Description>
+    <Copyright>Copyright ©  2018</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/iQuarc/DataLocalization/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/iQuarc/DataLocalization</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/iQuarc/DataLocalization</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Linq Data Localization Helper DataAccess MultiLanguage</PackageTags>
+    <PackageReleaseNotes>- Added .NetCore2.0 and .Netstadard2.0 targets
+- Fixed nested translation bug preventing translation of nested collections
+</PackageReleaseNotes>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.4</Version>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Data\ILocalizedQueryable.cs" />
-    <Compile Include="Data\LocalizationConfig.cs" />
-    <Compile Include="Data\LocalizationExpressionVisitor.cs" />
-    <Compile Include="Data\LocalizedQueryable.cs" />
-    <Compile Include="Data\LocalizedQueryExtensions.cs" />
-    <Compile Include="Data\LocalizedQueryProvider.cs" />
-    <Compile Include="Data\TranslationForAttribute.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="iQuarc.DataLocalization.nuspec" />
-    <None Include="make-package.bat" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

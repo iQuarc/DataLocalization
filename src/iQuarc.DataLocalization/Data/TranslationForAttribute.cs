@@ -2,6 +2,7 @@
 
 namespace iQuarc.DataLocalization
 {
+    [AttributeUsageAttribute(AttributeTargets.Class)]
     public class TranslationForAttribute : Attribute
     {
         public TranslationForAttribute(Type translatedEntity)
