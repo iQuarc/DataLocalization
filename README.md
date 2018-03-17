@@ -7,6 +7,17 @@ Overview
 
 The library provides a set of helper methods for querying localized data split in multiple tables. The library works by rewriting Linq expression trees that perform projections on the main table, to join and retrieve data from localization tables when available.
 
+Tutorial
+-----------------
+
+For a detailed step by step tororial **Daniel Kvis** has written a 4 part blog series: 
+
+ - [Simple data localisation with .NET core – Part 1 – Set up basic .NET core MVC project](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-1-set-up-basic-net-core-mvc-project)
+ - [Simple data localisation with .NET core – Part 2 – Add models, database and migrations with code first](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-2-add-models-database-and-migrations-with-code-first)
+ - [Simple data localisation with .NET core – Part 3 – Add API Controller to view model data](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-3-add-api-controller-to-view-model-data)
+ - [Simple data localisation with .NET core– Part 4 – Add data localisation for models using iQuarc.DataLocalization](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-4-add-data-localisation-for-models-using-iquarc-datalocalization)
+ 
+
 Usage Patterns
 ------------------
 
