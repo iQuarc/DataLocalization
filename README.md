@@ -10,7 +10,7 @@ The library provides a set of helper methods for querying localized data split i
 Tutorial
 -----------------
 
-For a detailed step by step tororial **Daniel Kvis** has written a 4 part blog series: 
+For a detailed step by step tutorial **Daniel Kvis** has written a 4 part blog series: 
 
  - [Simple data localisation with .NET core – Part 1 – Set up basic .NET core MVC project](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-1-set-up-basic-net-core-mvc-project)
  - [Simple data localisation with .NET core – Part 2 – Add models, database and migrations with code first](https://danielkvist.net/code/simple-data-localisation-with-net-core-and-iquarc-datalocalization-from-scratch-part-2-add-models-database-and-migrations-with-code-first)
