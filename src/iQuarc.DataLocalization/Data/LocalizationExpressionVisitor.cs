@@ -12,13 +12,14 @@ namespace iQuarc.DataLocalization
         private static readonly ConcurrentDictionary<PropertyInfo, PropertyMapping> Translations = new ConcurrentDictionary<PropertyInfo, PropertyMapping>();
         private readonly CultureInfo currentCulture;
         private bool directlyInSelectMethod;
+        private ConstantExpression _currentLanguageCode;
 
         public LocalizationExpressionVisitor(CultureInfo currentCulture)
         {
             this.currentCulture = currentCulture ?? throw new ArgumentNullException(nameof(currentCulture));
         }
 
-        private object CurrentLanguageCode => LocalizationConfig.CultureIdentifier(currentCulture);
+        private ConstantExpression CurrentLanguageCode => _currentLanguageCode ?? (_currentLanguageCode = Expression.Constant(LocalizationConfig.CultureIdentifier(currentCulture)));
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
@@ -84,7 +85,7 @@ namespace iQuarc.DataLocalization
             return base.VisitMemberAssignment(node);
         }
 
-        private static Expression GetTranslationExpression(MemberExpression memberExpression, PropertyMapping propertyMapping, object languageCode)
+        private static Expression GetTranslationExpression(MemberExpression memberExpression, PropertyMapping propertyMapping, ConstantExpression languageCode)
         {
 
             // This method transforms member expression {e} to {e.Translations.Where(p => p.Language.Code == "en").Select(p => p.Property).FirstOrDefault() ?? e.Property}
@@ -114,7 +115,7 @@ namespace iQuarc.DataLocalization
                                          Expression.Property(entity, propertyMapping.SourceProperty));
         }
 
-        private static LambdaExpression LanguageCodeLambda(PropertyMapping propertyMapping, object languageCode)
+        private static LambdaExpression LanguageCodeLambda(PropertyMapping propertyMapping, ConstantExpression languageCode)
         {
             // Target: p => p.Language.Code == "en"
             var param = Expression.Parameter(propertyMapping.TranslationEntity, "p"); //{p}
@@ -123,7 +124,7 @@ namespace iQuarc.DataLocalization
                 Expression.Property(param, propertyMapping.LanguageProperty), 
                 ((MemberExpression)StripConvert(((LambdaExpression)LocalizationConfig.LanguageExpression).Body)).Member.Name); //{p.Language.Code}
 
-            var equalsExpression = Expression.Equal(languageProperty, Expression.Constant(languageCode)); // {p.Language.Code == "en"}
+            var equalsExpression = Expression.Equal(languageProperty, languageCode); // {p.Language.Code == "en"}
             var languageCodeLambda = Expression.Lambda(equalsExpression, param); //{p => p.Language.Code == "en"}
             return languageCodeLambda;
         }

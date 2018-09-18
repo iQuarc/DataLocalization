@@ -134,29 +134,29 @@ namespace iQuarc.DataLocalization.Tests.UnitTests
             {
                 Id = 1,
                 Name = "Beers",
-                Localizations = new List<CateogoryLocalization>
+                Localizations = new List<CategoryLocalization>
                     {
-                        new CateogoryLocalization {CategoryId = 1, LanguageId = 1, Language = fr, Name = "Bières"},
-                        new CateogoryLocalization {CategoryId = 1, LanguageId = 2, Language = ro, Name = "Beri"}
+                        new CategoryLocalization {CategoryId = 1, LanguageId = 1, Language = fr, Name = "Bières"},
+                        new CategoryLocalization {CategoryId = 1, LanguageId = 2, Language = ro, Name = "Beri"}
                     }
             };
             var cat2 = new Category
             {
                 Id = 2,
                 Name = "Wines",
-                Localizations = new List<CateogoryLocalization>
+                Localizations = new List<CategoryLocalization>
                     {
-                        new CateogoryLocalization {CategoryId = 2, LanguageId = 1, Language = fr, Name = "Vins"},
-                        new CateogoryLocalization {CategoryId = 2, LanguageId = 2, Language = ro, Name = "Vinuri"}
+                        new CategoryLocalization {CategoryId = 2, LanguageId = 1, Language = fr, Name = "Vins"},
+                        new CategoryLocalization {CategoryId = 2, LanguageId = 2, Language = ro, Name = "Vinuri"}
                     }
             };
             var cat3 = new Category
             {
                 Id = 3,
                 Name = "Foods",
-                Localizations = new List<CateogoryLocalization>
+                Localizations = new List<CategoryLocalization>
                     {
-                        new CateogoryLocalization {CategoryId = 3, LanguageId = 1, Language = fr, Name = "Aliments"},
+                        new CategoryLocalization {CategoryId = 3, LanguageId = 1, Language = fr, Name = "Aliments"},
                     }
             };
 
