@@ -28,5 +28,10 @@ namespace iQuarc.DataLocalization.Tests.UnitTests
         {
             return ctx.Categories;
         }
+
+        protected override IQueryable<CategoryLocalization> GetCategoryLocalizations()
+        {
+            return ctx.CategoryLocalizations;
+        }
     }
 }

@@ -58,5 +58,10 @@ namespace iQuarc.DataLocalization.Tests.UnitTests
                 };
             }
         }
+
+        protected override IQueryable<CategoryLocalization> GetCategoryLocalizations()
+        {
+            return this.GetCategories().SelectMany(c => c.Localizations);
+        }
     }
 }

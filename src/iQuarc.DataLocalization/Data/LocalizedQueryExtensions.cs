@@ -24,5 +24,6 @@ namespace iQuarc.DataLocalization
         {
             return new LocalizedQueryable(query, culture);
         }
+
     }
 }
